@@ -31,19 +31,43 @@ const showAllNews = (data, category_name) => {
       const newsContainer = document.getElementById('all-news');
       newsContainer.innerHTML = ""
     data.data.forEach((singleNews) => {
-       const card = document.createElement('div');
-       card.classList.add('card','mb-3');
+
+      // destructuring , main array er vitor child proparty added
+      const {image_url,title,author,details,total_view} =singleNews;
+       const card = document.createElement('div'); // div create 
+       card.classList.add('card','mb-3'); // class create
+        // tempelte string using   child div create
        card.innerHTML = `
        <div class="row g-0">
        <div class="col-md-4">
-         <img src="${singleNews.image_url}" class="img-fluid rounded-start" alt="...">
+         <img src="${image_url}" class="img-fluid rounded-start" alt="...">
        </div>
-       <div class="col-md-8">
+       <div class="col-md-8 d-flex flex-column">
          <div class="card-body">
-           <h5 class="card-title">${singleNews.title}</h5>
-           <p class="card-text">${singleNews.details.slice(0,200)}...</p>
-           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-         </div>
+           <h5 class="card-title">${title}</h5>
+           <p class="card-text">${details.slice(0,200)}...</p>
+           </div>
+           <div class="card-footer border-0 bg-body d-flex justify-content-between" alig>
+            <div class="d-flex gap-2">
+                  <img src="${author.img}" class="img-fluid rounded-circle" alt="..." height="40" width="40">       
+                  <div>
+                    <p class="m-0 p-0">${author.name}</p>
+                    <p class= "m-0 p-0">${author.published_date}</p>
+                 </div>
+            </div>
+           <div class="d-flex align-items-center">
+            <i class="fas fa-eye"> </i>
+            <p class= "m-0 p-0">${total_view}</p>      
+           </div>
+           <div>
+              <i class="fas fa-star"> </i>
+            
+           </div>
+           <div>
+              <i class="fas fa-arrow-right"> </i>
+              
+           </div>
+           </div>
        </div>
      </div>
        `;
